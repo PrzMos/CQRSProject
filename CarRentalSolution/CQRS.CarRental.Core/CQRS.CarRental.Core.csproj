@@ -21,10 +21,7 @@
   <ItemGroup>
     <Folder Include="Commands\Handlers\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="Models\Write\" />
-    <Folder Include="Models\Read\" />
     <Folder Include="Results\" />
-    <Folder Include="Persistance\" />
     <Folder Include="Queries\Handlers\" />
   </ItemGroup>
 
