@@ -26,5 +26,10 @@ namespace CQRS.CarRental.Core.Models.Write
             FirstName = firstName;
             LicenceNumber = lastName;
         }
+
+        public string GetFullName()
+        {
+            return $"{FirstName} {LastName}";
+        }
     }
 }

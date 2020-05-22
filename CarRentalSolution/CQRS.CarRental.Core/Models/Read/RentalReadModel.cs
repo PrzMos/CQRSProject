@@ -11,7 +11,7 @@ namespace CQRS.CarRental.Core.Models.Read
         public Guid Id { get; set; }
         public Guid RentalId { get; set; }
         public DateTime Created { get; set; }
-        public DateTime Finished { get; set; }
+        public DateTime? Finished { get; set; }
         public decimal Total { get; set; }
         public Guid DriverId { get; set; }
         public string Driver { get; set; }
@@ -19,7 +19,7 @@ namespace CQRS.CarRental.Core.Models.Read
         public string RegistrationNumber { get; set; }
         public double StartXPosition { get; set; }
         public double StartYPosition { get; set; }
-        public double StopXPosition { get; set; }
-        public double StopYPosition { get; set; }
+        public double? StopXPosition { get; set; }
+        public double? StopYPosition { get; set; }
     }
 }

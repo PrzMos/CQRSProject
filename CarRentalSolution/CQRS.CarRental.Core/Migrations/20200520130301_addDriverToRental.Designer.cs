@@ -4,14 +4,16 @@ using CQRS.CarRental.Core.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CQRS.CarRental.Core.Migrations
 {
     [DbContext(typeof(CarRentalContext))]
-    partial class CarRentalContextModelSnapshot : ModelSnapshot
+    [Migration("20200520130301_addDriverToRental")]
+    partial class addDriverToRental
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +39,7 @@ namespace CQRS.CarRental.Core.Migrations
                     b.Property<Guid>("DriverId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("Finished")
+                    b.Property<DateTime>("Finished")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RegistrationNumber")
@@ -52,10 +54,10 @@ namespace CQRS.CarRental.Core.Migrations
                     b.Property<double>("StartYPosition")
                         .HasColumnType("float");
 
-                    b.Property<double?>("StopXPosition")
+                    b.Property<double>("StopXPosition")
                         .HasColumnType("float");
 
-                    b.Property<double?>("StopYPosition")
+                    b.Property<double>("StopYPosition")
                         .HasColumnType("float");
 
                     b.Property<decimal>("Total")

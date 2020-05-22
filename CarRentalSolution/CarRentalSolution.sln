@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRS.CarRental.Core", "CQRS.CarRental.Core\CQRS.CarRental.Core.csproj", "{F9A596B2-ADEB-4926-A09D-FB26E611F0E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CQRS.CarRental.Core", "CQRS.CarRental.Core\CQRS.CarRental.Core.csproj", "{F9A596B2-ADEB-4926-A09D-FB26E611F0E3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedKernel", "..\..\..\..\OneDrive\Pulpit\EscapeRoom\SharedKernel\SharedKernel.csproj", "{0C8A2C68-657D-48AA-B60C-E24691C0A00B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F9A596B2-ADEB-4926-A09D-FB26E611F0E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9A596B2-ADEB-4926-A09D-FB26E611F0E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9A596B2-ADEB-4926-A09D-FB26E611F0E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C8A2C68-657D-48AA-B60C-E24691C0A00B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C8A2C68-657D-48AA-B60C-E24691C0A00B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C8A2C68-657D-48AA-B60C-E24691C0A00B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C8A2C68-657D-48AA-B60C-E24691C0A00B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
