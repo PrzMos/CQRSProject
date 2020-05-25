@@ -9,6 +9,17 @@ namespace CQRS.CarRental.Core.Persistance
 {
     public class CarRentalUnitOfWork : ICarRentalUnitOfWork
     {
+        public CarRentalUnitOfWork(CarRentalContext context, ICarRepository carRepository, IDriverRepository driverRepository, IDriverReadModelRepository driverRead, ICarReadModelRepository carReadModel, IRentalRepository rentalRepository, IRentalReadModelRepository rentalReadModel)
+        {
+            Context = context ?? throw new ArgumentNullException(nameof(context));
+            CarRepository = carRepository ?? throw new ArgumentNullException(nameof(carRepository));
+            DriverRepository = driverRepository ?? throw new ArgumentNullException(nameof(driverRepository));
+            DriverRead = driverRead ?? throw new ArgumentNullException(nameof(driverRead));
+            CarReadModel = carReadModel ?? throw new ArgumentNullException(nameof(carReadModel));
+            RentalRepository = rentalRepository ?? throw new ArgumentNullException(nameof(rentalRepository));
+            RentalReadModel = rentalReadModel ?? throw new ArgumentNullException(nameof(rentalReadModel));
+        }
+
         public CarRentalContext Context { get; protected set; }
         public ICarRepository CarRepository { get; }
 
@@ -19,6 +30,9 @@ namespace CQRS.CarRental.Core.Persistance
         public ICarReadModelRepository CarReadModel { get; }
 
         public IRentalRepository RentalRepository { get; }
+
+        public IRentalReadModelRepository RentalReadModel { get; }
+        
 
         public void Commit()
         {

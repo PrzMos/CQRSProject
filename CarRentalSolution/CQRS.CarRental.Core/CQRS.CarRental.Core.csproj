@@ -20,11 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Results\" />
-    <Folder Include="Queries\Handlers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\OneDrive\Pulpit\EscapeRoom\SharedKernel\SharedKernel.csproj" />
   </ItemGroup>
 

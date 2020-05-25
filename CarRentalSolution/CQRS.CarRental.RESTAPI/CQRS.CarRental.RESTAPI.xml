@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CQRS.CarRental.RESTAPI</name>
+    </assembly>
+    <members>
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.CarsController.Get">
+            <summary>
+            Gets list of all cars
+            </summary>
+            <returns>An ActionResult of List of CarResult</returns>
+        </member>
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.CarsController.Get(System.Guid)">
+            <summary>
+            Gets car with specified Id
+            </summary>
+            <param name="id">The id of specified car</param>
+            <returns>An ActionResult of CarResult</returns>
+        </member>
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.CarsController.Post(CQRS.CarRental.Core.Commands.CreateCarCommand)">
+            <summary>
+            
+            </summary>
+            <param name="createCarCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.CarsController.Delete(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.CarsController.GetCarsOptions">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.DriversController.GetDrivers">
+            <summary>
+            Get a list of drivers
+            </summary>
+            <returns>An ActionResult of type List of DriverResult</returns>
+        </member>
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.DriversController.GetDriver(System.Guid)">
+            <summary>
+            Returns a driver by specyfic id
+            </summary>
+            <param name="driverId">The id of the driver</param>
+            <returns>An ActionResult of DriverResult</returns>
+            <response code="200">Returns the requested driver</response>
+        </member>
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.RentalsController.GetRentals">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.RentalsController.GetRental(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="rentalId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.RentalsController.PostRental(CQRS.CarRental.Core.Commands.CreateRentCommand)">
+            <summary>
+            Create rental of a specyfic Car for a specyfic Driver.
+            </summary>
+            <param name="createRentCommand">The rent to create.</param>
+            <returns>An ActionResult of type RentalModelResult.</returns>
+        </member>
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.RentalsController.UpdateRental(System.Guid,CQRS.CarRental.Core.Commands.StopRentingCarCommand)">
+            <summary>
+            Stop renting car
+            </summary>
+            <param name="rentalId">The id of rental to update.</param>
+            <param name="stopRentingCarCommand">The object with updated values.</param>
+            <returns>An IActionResult</returns>
+            <response code="422">Valdation error</response>
+        </member>
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.RentalsController.DeleteRental(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="rentalId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.RentalsController.GetRentalOption">
+            <summary>
+            Shows allowed options to use in controller.
+            </summary>
+            <returns>An IActionResult</returns>
+        </member>
+    </members>
+</doc>

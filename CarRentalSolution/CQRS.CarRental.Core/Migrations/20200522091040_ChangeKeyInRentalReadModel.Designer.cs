@@ -4,71 +4,22 @@ using CQRS.CarRental.Core.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CQRS.CarRental.Core.Migrations
 {
     [DbContext(typeof(CarRentalContext))]
-    partial class CarRentalContextModelSnapshot : ModelSnapshot
+    [Migration("20200522091040_ChangeKeyInRentalReadModel")]
+    partial class ChangeKeyInRentalReadModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("CQRS.CarRental.Core.Models.Read.CarViewModel", b =>
-                {
-                    b.Property<Guid>("CarId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double>("CurrentDistance")
-                        .HasColumnType("float");
-
-                    b.Property<string>("RegistrationNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(7)")
-                        .HasMaxLength(7);
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<double>("TotalDistance")
-                        .HasColumnType("float");
-
-                    b.Property<double>("XPosition")
-                        .HasColumnType("float");
-
-                    b.Property<double>("YPosition")
-                        .HasColumnType("float");
-
-                    b.HasKey("CarId");
-
-                    b.ToTable("CarViewModels");
-                });
-
-            modelBuilder.Entity("CQRS.CarRental.Core.Models.Read.DriverViewModel", b =>
-                {
-                    b.Property<Guid>("DriverId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LicenceNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DriverId");
-
-                    b.ToTable("DriverViewModels");
-                });
 
             modelBuilder.Entity("CQRS.CarRental.Core.Models.Read.RentalReadModel", b =>
                 {

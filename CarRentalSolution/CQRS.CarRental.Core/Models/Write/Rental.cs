@@ -20,5 +20,10 @@ namespace CQRS.CarRental.Core.Models.Write
         [ForeignKey("CarId")]
         public Car Car { get; set; }
         public decimal Total { get; set; }
+
+        public decimal GetTotalPrice()
+        {
+            return 0.20m * (Finished - Started).Minutes;
+        }
     }
 }

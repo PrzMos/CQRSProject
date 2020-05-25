@@ -12,5 +12,6 @@ namespace CQRS.CarRental.Core.Interfaces
         IDriverReadModelRepository DriverRead { get; }
         ICarReadModelRepository CarReadModel { get; }
         IRentalRepository RentalRepository { get; }
+        IRentalReadModelRepository RentalReadModel { get; }
     }
 }

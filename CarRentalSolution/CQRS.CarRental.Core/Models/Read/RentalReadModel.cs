@@ -8,7 +8,6 @@ namespace CQRS.CarRental.Core.Models.Read
     public class RentalReadModel
     {
         [Key]
-        public Guid Id { get; set; }
         public Guid RentalId { get; set; }
         public DateTime Created { get; set; }
         public DateTime? Finished { get; set; }

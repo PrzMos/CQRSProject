@@ -21,26 +21,48 @@ namespace CQRS.CarRental.Core.Commands.Handlers
 
             rentToCreate.RentalId = Guid.NewGuid();
 
-            var carToRent = _unitOfWork.CarRepository.Get(command.CarId);
+            Run(rentToCreate);
+        }
+
+        public void Execute(CreateRentCommand command, out Guid itemId)
+        {
+            var rentToCreate = _mapper.Map<Rental>(command);
+
+            rentToCreate.RentalId = Guid.NewGuid();
+
+            itemId = rentToCreate.RentalId;
+
+            Run(rentToCreate);
+        }
+
+        private void Run(Rental rentToCreate)
+        {
+            var carToRent = _unitOfWork.CarRepository.Get(rentToCreate.CarId);
             carToRent.Status = Status.wypożyczony;
 
-            var driver = _unitOfWork.DriverRepository.Get(command.DriverId);
+            var driver = _unitOfWork.DriverRepository.Get(rentToCreate.DriverId);
 
             _unitOfWork.RentalRepository.Insert(rentToCreate);
 
             var rentalReadModel = new RentalReadModel()
             {
-                CarId = command.CarId,
+                CarId = rentToCreate.CarId,
                 Driver = driver.GetFullName(),
                 DriverId = driver.DriverId,
                 Created = DateTime.Now,
-                Id = Guid.NewGuid(),
                 RegistrationNumber = carToRent.RegistrationNumber,
                 RentalId = rentToCreate.RentalId,
                 StartXPosition = carToRent.XPosition,
                 StartYPosition = carToRent.YPosition,
                 Total = 0
             };
+
+            _unitOfWork.RentalReadModel.Insert(rentalReadModel);
+
+            var carReadModel = _unitOfWork.CarReadModel.Get(carToRent.CarId);
+            carReadModel.Status = Status.wypożyczony;
+
+            _unitOfWork.Commit();
         }
     }
 }

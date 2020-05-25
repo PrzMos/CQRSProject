@@ -24,7 +24,7 @@ namespace CQRS.CarRental.Core.Models.Write
             DriverId = Guid.NewGuid();
             LicenceNumber = licenceNumber;
             FirstName = firstName;
-            LicenceNumber = lastName;
+            LastName = lastName;
         }
 
         public string GetFullName()

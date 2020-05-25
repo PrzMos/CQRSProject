@@ -19,11 +19,28 @@ namespace CQRS.CarRental.Core.Commands.Handlers
         public void Execute(CreateCarCommand command)
         {
             var carToCreate = _mapper.Map<Car>(command);
+            
             carToCreate.CarId = Guid.NewGuid();
 
-            _unitOfWork.CarRepository.Insert(carToCreate);
+            Run(carToCreate);
+        }
 
-            var carReadModel = _mapper.Map<CarViewModel>(carToCreate);
+        public void Execute(CreateCarCommand command, out Guid itemId)
+        {
+            var carToCreate = _mapper.Map<Car>(command);
+            
+            carToCreate.CarId = Guid.NewGuid();
+
+            itemId = carToCreate.CarId;
+
+            Run(carToCreate);
+        }
+
+        private void Run(Car car)
+        {
+            _unitOfWork.CarRepository.Insert(car);
+
+            var carReadModel = _mapper.Map<CarViewModel>(car);
 
             _unitOfWork.CarReadModel.Insert(carReadModel);
 
