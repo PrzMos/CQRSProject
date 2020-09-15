@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CQRS.CarRental.Core.Models.Write;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -15,6 +16,7 @@ namespace CQRS.CarRental.Core.Models.Read
         public Guid DriverId { get; set; }
         public string Driver { get; set; }
         public Guid CarId { get; set; }
+        public Car Car { get; set; }
         public string RegistrationNumber { get; set; }
         public double StartXPosition { get; set; }
         public double StartYPosition { get; set; }

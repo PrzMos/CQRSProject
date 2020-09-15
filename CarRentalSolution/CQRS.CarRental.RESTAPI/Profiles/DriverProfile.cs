@@ -11,16 +11,20 @@ using System.Threading.Tasks;
 
 namespace CQRS.CarRental.RESTAPI.Profiles
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class DriverProfile : Profile
     {
         public DriverProfile()
         {
             CreateMap<CreateDriverCommand, Driver>().ReverseMap();
-            CreateMap<CreateDriverCommand, DriverResult>().ReverseMap();
             CreateMap<Driver, DriverViewModel>().ReverseMap();
             CreateMap<Driver, DriverResult>()
                 .ForMember(opt=>opt.FullName,
                             opt=>opt.MapFrom(src=>src.GetFullName()));
+            CreateMap<CreateDriverCommand, DriverResult>()
+                .ForMember(opt => opt.FullName,
+                            opt => opt.MapFrom(src => src.GetFullName()));
         }
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

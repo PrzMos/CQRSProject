@@ -15,9 +15,11 @@ namespace CQRS.CarRental.RESTAPI.Controllers
 {
     [Route("api/Cars")]
     [ApiController]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [Produces("application/json","application/xml")]
     [ProducesResponseType(StatusCodes.Status415UnsupportedMediaType)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class CarsController : ControllerBase
     {
         private readonly IQueryDispatcher _queryDispatcher;
@@ -30,13 +32,16 @@ namespace CQRS.CarRental.RESTAPI.Controllers
             _commandDispatcher = commandDispatcher ?? throw new ArgumentNullException(nameof(commandDispatcher));
             _mapper = mapper;
         }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
         /// <summary>
         /// Gets list of all cars
         /// </summary>
         /// <returns>An ActionResult of List of CarResult</returns>
         [HttpGet]
-        public ActionResult<List<CarResult>> Get()
+        [ProducesResponseType(StatusCodes.Status200OK, StatusCode = 200)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, StatusCode = 404)]
+        public ActionResult<List<CarResult>> GetCars()
         {
             var query = new GetAllCarsQuery();
 
@@ -44,7 +49,7 @@ namespace CQRS.CarRental.RESTAPI.Controllers
 
             if (result == null)
             {
-                return NoContent();
+                return NotFound();
             }
 
             return Ok(result);
@@ -56,6 +61,8 @@ namespace CQRS.CarRental.RESTAPI.Controllers
         /// <param name="id">The id of specified car</param>
         /// <returns>An ActionResult of CarResult</returns>
         [HttpGet("{id}", Name="GetCar")]
+        [ProducesResponseType(StatusCodes.Status200OK, StatusCode = 200)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, StatusCode = 404)]
         public ActionResult<CarResult> Get(Guid id)
         {
             if (id == Guid.Empty)
@@ -76,11 +83,13 @@ namespace CQRS.CarRental.RESTAPI.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Create new car
         /// </summary>
-        /// <param name="createCarCommand"></param>
-        /// <returns></returns>
+        /// <param name="createCarCommand">Car to create</param>
+        /// <returns>An IActionResult</returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created,StatusCode =201)]
+        [ProducesResponseType(StatusCodes.Status406NotAcceptable, StatusCode = 406)]
         public IActionResult Post([FromBody] CreateCarCommand createCarCommand)
         {
             if (createCarCommand == null)
@@ -99,14 +108,13 @@ namespace CQRS.CarRental.RESTAPI.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Delete car with specyfic Id
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Id of a car to delete</param>
+        /// <returns>An IActionResult</returns>
         [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent, StatusCode = 204)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, StatusCode = 404)]
         public IActionResult Delete(Guid id)
         {
             if (id == Guid.Empty)
@@ -122,10 +130,11 @@ namespace CQRS.CarRental.RESTAPI.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Returns allowed options to use in controller.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An IActionResult</returns>
         [HttpOptions]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult GetCarsOptions()
         {
             Response.Headers.Add("Allow", "GET,POST,DELETE");

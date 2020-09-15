@@ -9,7 +9,7 @@ namespace CQRS.CarRental.Core.Results
     {
         public Guid RentalId { get; set; }
         public DateTime Started { get; set; }
-        public DateTime Finished { get; set; }
+        public DateTime? Finished { get; set; }
         public decimal Total { get; set; }
     }
 }

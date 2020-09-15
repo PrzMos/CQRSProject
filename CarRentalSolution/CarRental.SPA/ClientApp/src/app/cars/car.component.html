@@ -1,0 +1,19 @@
+<h1>Cars</h1>
+<p>This cars are loaded from Rental service...</p>
+<p> *ngIf="!cars"<em>Loading cars list... please wait.</em></p>
+<table class='table' *ngIf="cars">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>Registration Number</td>
+      <td>PostionX</td>
+      <td>PositionY</td>
+      <td>Status</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let car in cars">
+      <td>{{ car.Id }}</td>
+    </tr>
+  </tbody>
+</table>

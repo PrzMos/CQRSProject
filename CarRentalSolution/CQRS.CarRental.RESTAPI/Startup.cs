@@ -30,10 +30,13 @@ using SharedKernel.Dispatchers;
 using SharedKernel.Dispatchers.Implementations;
 using SharedKernel.Persistance;
 
+
 namespace CQRS.CarRental.RESTAPI
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class Startup
     {
+        readonly string MyAllowOrigins = "_myAllowOrigins"; 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -44,6 +47,13 @@ namespace CQRS.CarRental.RESTAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(setupAction =>
+            {
+                setupAction.AddPolicy(name: MyAllowOrigins, builder =>
+                {
+                    builder.WithOrigins("https://localhost:44330", "http://localhost:55482");
+                });
+            });
 
             services.AddControllers(configure =>
             {
@@ -88,11 +98,11 @@ namespace CQRS.CarRental.RESTAPI
             #endregion
 
             #region register commands
-            services.AddScoped<ICommandHandler<CreateDriverCommand>, CreateDriverHandler>();
-            services.AddScoped<ICommandHandler<CreateRentCommand>, CreateRentHandler>();
-            services.AddScoped<ICommandHandler<CreateCarCommand>, CreateCarHandler>();
-            services.AddScoped<ICommandHandler<CreateCarCommand>, CreateCarHandler>();
-            services.AddScoped<ICommandHandler<StopRentingCarCommand>, StopRentingCarHandler>();
+            services.AddScoped<ICommandHandler<CreateDriverCommand>, CreateDriverCommandHandler>();
+            services.AddScoped<ICommandHandler<CreateRentCommand>, CreateRentCommandHandler>();
+            services.AddScoped<ICommandHandler<CreateCarCommand>, CreateCarCommandHandler>();
+            services.AddScoped<ICommandHandler<CreateCarCommand>, CreateCarCommandHandler>();
+            services.AddScoped<ICommandHandler<StopRentingCarCommand>, StopRentingCarCommandHandler>();
             services.AddScoped<ICommandHandler<DeleteDriverCommand>, DeleteDriverCommandHandler>();
             services.AddScoped<ICommandHandler<DeleteRentCommand>, DeleteRentCommandHandler>();
             services.AddScoped<ICommandHandler<DeleteCarCommand>, DeleteCarCommandHandler>();
@@ -123,6 +133,7 @@ namespace CQRS.CarRental.RESTAPI
 
                 setupAction.IncludeXmlComments(xmlCommentsFullPath);
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -153,6 +164,8 @@ namespace CQRS.CarRental.RESTAPI
 
             app.UseRouting();
 
+            app.UseCors(MyAllowOrigins);
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -163,4 +176,5 @@ namespace CQRS.CarRental.RESTAPI
             carRentalContext.InitialDbData();
         }
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

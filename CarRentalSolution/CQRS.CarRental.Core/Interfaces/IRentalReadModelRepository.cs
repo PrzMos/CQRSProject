@@ -8,6 +8,6 @@ namespace CQRS.CarRental.Core.Interfaces
 {
     public interface IRentalReadModelRepository : IRepository<RentalReadModel>
     {
-
+        RentalReadModel GetRentalWithCarAndDriver(Guid rentalId);
     }
 }

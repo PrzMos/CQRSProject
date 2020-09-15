@@ -16,7 +16,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:44336;"
+      "applicationUrl": "http://localhost:5001;"
     },
     "CQRS.CarRental.RESTAPI": {
       "commandName": "Project",

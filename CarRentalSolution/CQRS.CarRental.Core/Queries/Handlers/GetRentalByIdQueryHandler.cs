@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CQRS.CarRental.Core.Interfaces;
+using CQRS.CarRental.Core.Models.Read;
 using CQRS.CarRental.Core.Results;
 using SharedKernel.Dispatchers;
 using System;
@@ -18,7 +19,7 @@ namespace CQRS.CarRental.Core.Queries.Handlers
         {
             if (query.RentalId != Guid.Empty)
             {
-                var rental = _unitOfWork.RentalReadModel.Get(query.RentalId);
+                RentalReadModel rental = _unitOfWork.RentalReadModel.GetRentalWithCarAndDriver(query.RentalId);
 
                 var rentalToReturn = _mapper.Map<RentalModelResult>(rental);
 

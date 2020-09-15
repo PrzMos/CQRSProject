@@ -4,7 +4,7 @@
         <name>CQRS.CarRental.RESTAPI</name>
     </assembly>
     <members>
-        <member name="M:CQRS.CarRental.RESTAPI.Controllers.CarsController.Get">
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.CarsController.GetCars">
             <summary>
             Gets list of all cars
             </summary>
@@ -19,23 +19,23 @@
         </member>
         <member name="M:CQRS.CarRental.RESTAPI.Controllers.CarsController.Post(CQRS.CarRental.Core.Commands.CreateCarCommand)">
             <summary>
-            
+            Create new car
             </summary>
-            <param name="createCarCommand"></param>
-            <returns></returns>
+            <param name="createCarCommand">Car to create</param>
+            <returns>An IActionResult</returns>
         </member>
         <member name="M:CQRS.CarRental.RESTAPI.Controllers.CarsController.Delete(System.Guid)">
             <summary>
-            
+            Delete car with specyfic Id
             </summary>
-            <param name="id"></param>
-            <returns></returns>
+            <param name="id">Id of a car to delete</param>
+            <returns>An IActionResult</returns>
         </member>
         <member name="M:CQRS.CarRental.RESTAPI.Controllers.CarsController.GetCarsOptions">
             <summary>
-            
+            Returns allowed options to use in controller.
             </summary>
-            <returns></returns>
+            <returns>An IActionResult</returns>
         </member>
         <member name="M:CQRS.CarRental.RESTAPI.Controllers.DriversController.GetDrivers">
             <summary>
@@ -51,18 +51,37 @@
             <returns>An ActionResult of DriverResult</returns>
             <response code="200">Returns the requested driver</response>
         </member>
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.DriversController.PostDriver(CQRS.CarRental.Core.Commands.CreateDriverCommand)">
+            <summary>
+            Create a driver
+            </summary>
+            <param name="createDriverCommand">The driver to create</param>
+            <returns>An IActionResult</returns>
+        </member>
+        <member name="M:CQRS.CarRental.RESTAPI.Controllers.DriversController.DeleteDriver(System.Guid)">
+            <summary>
+            Delete driver within specified Id
+            </summary>
+            <param name="driverId">Id of a driver to delete</param>
+            <returns>An IActionResult</returns>
+        </member>
+        <member name="T:CQRS.CarRental.RESTAPI.Controllers.RentalsController">
+            <summary>
+            Controller which contains actions on Rental model
+            </summary>
+        </member>
         <member name="M:CQRS.CarRental.RESTAPI.Controllers.RentalsController.GetRentals">
             <summary>
-            
+            Returns a list of rentals
             </summary>
-            <returns></returns>
+            <returns>An ActionResult of List of RentalResult</returns>
         </member>
         <member name="M:CQRS.CarRental.RESTAPI.Controllers.RentalsController.GetRental(System.Guid)">
             <summary>
-            
+            Returns Rental with a specyfic Id
             </summary>
-            <param name="rentalId"></param>
-            <returns></returns>
+            <param name="rentalId">Id of Rent to get.</param>
+            <returns>An ActionResult of RentalModelResult</returns>
         </member>
         <member name="M:CQRS.CarRental.RESTAPI.Controllers.RentalsController.PostRental(CQRS.CarRental.Core.Commands.CreateRentCommand)">
             <summary>
@@ -82,10 +101,10 @@
         </member>
         <member name="M:CQRS.CarRental.RESTAPI.Controllers.RentalsController.DeleteRental(System.Guid)">
             <summary>
-            
+            Delete a rental with a specified Id
             </summary>
-            <param name="rentalId"></param>
-            <returns></returns>
+            <param name="rentalId">Id of a specyfic Rental to delete</param>
+            <returns>An IActionResult</returns>
         </member>
         <member name="M:CQRS.CarRental.RESTAPI.Controllers.RentalsController.GetRentalOption">
             <summary>

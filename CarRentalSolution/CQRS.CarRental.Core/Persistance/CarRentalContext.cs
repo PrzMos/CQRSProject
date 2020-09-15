@@ -9,13 +9,14 @@ using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace CQRS.CarRental.Core.Persistance
 {
     public class CarRentalContext :DbContext
     {
-        public string ConnectionString { get; } = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CQRS_EscapeRoom;Trusted_Connection=True";
+        public string ConnectionString { get; } = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CQRS_CarRental4;Trusted_Connection=True";
 
 
         public DbSet<Car> Cars { get; set; }
@@ -87,11 +88,19 @@ namespace CQRS.CarRental.Core.Persistance
 
                 Rentals.Add(rental);
 
+                if (Cars.Any())
+                {
+                    var carToUpdate = Cars.FirstOrDefault(x=>x.CarId==rental.CarId);
+                    carToUpdate.ChangeStatus();
+                }
+
                 RentalReadModel rentalReadModel = new RentalReadModel()
                 {
                     RentalId = rental.RentalId,
                     RegistrationNumber = "KOL0201",
                     CarId = rental.CarId,
+                    DriverId = rental.DriverId,
+                    Driver = "Jan Kowalski",
                     Created = rental.Started,
                     StartXPosition = 1.4,
                     StartYPosition = -2.2

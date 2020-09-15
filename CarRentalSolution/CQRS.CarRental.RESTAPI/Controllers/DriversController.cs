@@ -14,7 +14,11 @@ namespace CQRS.CarRental.RESTAPI.Controllers
 {
     [Route("api/Drivers")]
     [Produces("application/json", "application/xml")]
+    [ProducesResponseType(StatusCodes.Status415UnsupportedMediaType)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ApiController]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class DriversController : ControllerBase
     {
         private readonly IQueryDispatcher _queryDispatcher;
@@ -27,13 +31,15 @@ namespace CQRS.CarRental.RESTAPI.Controllers
             _commandDispatcher = commandDispatcher ?? throw new ArgumentNullException(nameof(commandDispatcher));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
         /// <summary>
         /// Get a list of drivers
         /// </summary>
         /// <returns>An ActionResult of type List of DriverResult</returns>
         [HttpGet]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(StatusCodes.Status200OK,StatusCode = 200)]
+        [ProducesResponseType(StatusCodes.Status404NotFound,StatusCode = 404)]
         public ActionResult<List<DriverResult>> GetDrivers()
         {
             var query = new GetAllDriversQuery();
@@ -70,10 +76,16 @@ namespace CQRS.CarRental.RESTAPI.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Create a driver
+        /// </summary>
+        /// <param name="createDriverCommand">The driver to create</param>
+        /// <returns>An IActionResult</returns>
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status406NotAcceptable, StatusCode = 406)]
         public IActionResult PostDriver([FromBody] CreateDriverCommand createDriverCommand)
         {
             if (createDriverCommand == null)
@@ -90,6 +102,11 @@ namespace CQRS.CarRental.RESTAPI.Controllers
             return CreatedAtRoute("GetDriver", new { driverId = driverId }, driverToReturn);
         }
 
+        /// <summary>
+        /// Delete driver within specified Id
+        /// </summary>
+        /// <param name="driverId">Id of a driver to delete</param>
+        /// <returns>An IActionResult</returns>
         [HttpDelete("{driverId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

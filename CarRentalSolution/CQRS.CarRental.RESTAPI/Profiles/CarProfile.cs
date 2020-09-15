@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace CQRS.CarRental.RESTAPI.Profiles
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class CarProfile : Profile
     {
         public CarProfile()
@@ -20,4 +21,5 @@ namespace CQRS.CarRental.RESTAPI.Profiles
             CreateMap<CreateCarCommand, CarResult>();
         }
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
